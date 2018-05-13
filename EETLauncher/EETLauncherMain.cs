@@ -43,7 +43,7 @@ namespace EETLauncher {
                     control.Font = Global.FradmcnRegular;
                 }
             }
-            /*if ( Global.TestBG2EEDirectory() ) {
+            if ( Global.TestBG2EEDirectory() ) {
                 if ( Global.TestEETInstalled() ) return;
                 DisableEETLauncherMainLb();
                 EETLauncherMain_TB_Log.Visible = true;
@@ -52,7 +52,7 @@ namespace EETLauncher {
                 DisableEETLauncherMainLb();
                 EETLauncherMain_TB_Log.Visible = true;
                 EETLauncherMain_TB_Log.Text = @"Please put EETLanucher.exe inside BG2EE directory";
-            }*/
+            }
         }
 
         private void EETLauncherMain_LB_PLAY_Click( object sender, EventArgs e ) {

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EETLauncher {
@@ -61,7 +62,7 @@ namespace EETLauncher {
             }
         }
 
-        private void EETLauncherSettings_LB_CHANGEGUI_Click( object sender, EventArgs e )
+        private async void EETLauncherSettings_LB_CHANGEGUI_Click( object sender, EventArgs e )
         {
             EETLauncherSettings_LB_CHANGEGUI.Enabled = false;
             EETLauncherSettings_LB_BACK.Enabled = false;
@@ -69,43 +70,27 @@ namespace EETLauncher {
             EETLauncherSettings_L_CurrentGUI.Text = @"CURRENT GUI: ???";
 
             var GUI = Global.GetEETGUI( true );
+            var ps0 = new Process { StartInfo = Global.SetEETGUI( GUI ) };
 
-            var si2 = Global.SetEETGUI( GUI );
-            var ps0 = new Process { StartInfo = si2 };
-            bWorker1.DoWork += (s, ea) =>
-            {
-                ps0.Start();
-                try {
+            try {
+                 var result = await Task.Run( () => {
+                    ps0.Start();
                     ps0.WaitForExit();
-                } catch ( Exception ex ) {
-                    File.AppendAllText( Environment.SpecialFolder.ApplicationData + @"\EETLauncher.log", Convert.ToString( ex.Message ) + Environment.NewLine );
-                }
-                try {
-                    ps0.GetType();
-                } catch ( InvalidOperationException ex ) {
-                    File.AppendAllText( Environment.SpecialFolder.ApplicationData + @"\EETLauncher.log", Convert.ToString( ex.Message ) + Environment.NewLine );
-
-                } catch ( Exception ex ) {
-                    File.AppendAllText( Environment.SpecialFolder.ApplicationData + @"\EETLauncher.log", Convert.ToString( ex.Message ) + Environment.NewLine );
-                }
-            };
-            bWorker1.RunWorkerCompleted += (s, ea) =>
-            {
-                var state = GetProcesExitState( ps0 );
-                if (state)
-                {
-                    Global.SetEETLauncherSettingsGuiState(Global.GetEETGUI(), this);
+                    return ps0;
+                });
+                var state = GetProcesExitState( result );
+                if ( state ) {
+                    Global.SetEETLauncherSettingsGuiState( Global.GetEETGUI(), this );
                     EETLauncherSettings_L_CurrentGUI.ForeColor = Color.Green;
                     EETLauncherSettings_LB_CHANGEGUI.Enabled = true;
                     EETLauncherSettings_LB_BACK.Enabled = true;
-
                 }
-                if (state == false)
-                {
+                if ( state == false ) {
                     EETLauncherSettings_L_CurrentGUI.ForeColor = Color.Red;
                 }
-            };
-            bWorker1.RunWorkerAsync();
+            } catch ( Exception ex ) {
+                File.AppendAllText( Environment.SpecialFolder.ApplicationData + @"\EETLauncher.log", Convert.ToString( ex.Message ) + Environment.NewLine );
+            }
         }
 
         private void EETLauncherSettings_LB_OpenEETBaldurLua_MouseHover( object sender, EventArgs e ) {
