@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("EETLauncher")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright( "Copyright © alienquake@hotmail.com" )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
