@@ -120,7 +120,7 @@ namespace EETLauncher {
             User32.ReleaseCapture();
             User32.SendMessage( Handle, User32.WmNclbuttondown, User32.HtCaption, 0 );
         }
-        private void bWorker1_DoWork( object sender, System.ComponentModel.DoWorkEventArgs e ) {
+        private void BWorker1_DoWork( object sender, System.ComponentModel.DoWorkEventArgs e ) {
 
         }
     }

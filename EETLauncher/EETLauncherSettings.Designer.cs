@@ -144,7 +144,7 @@
             // 
             // bWorker1
             // 
-            this.bWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bWorker1_DoWork);
+            this.bWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BWorker1_DoWork);
             // 
             // EETLauncherSettings
             // 
