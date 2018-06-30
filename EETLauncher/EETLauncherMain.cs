@@ -184,8 +184,7 @@ namespace EETLauncher {
 
     public static class StringExtensions { // not included as default in .NET ?
         public static bool ContainsIgnoreCase( string source, string toCheck, StringComparison compare = StringComparison.OrdinalIgnoreCase ) {
-            if ( source == null ) return false;
-            return source.IndexOf( toCheck, compare ) >= 0;
+            return source == null ? false : source.IndexOf( toCheck, compare ) >= 0;
         }
     }
 

@@ -73,7 +73,8 @@ namespace EETLauncher {
             var ps0 = new Process { StartInfo = Global.SetEETGUI( GUI ) };
 
             try {
-                 var result = await Task.Run( () => {
+				// because we want to target .NET 4.0, we are using TaskEx.Run from Microsoft.Bcl.Async instead of default Task.Run from .NET Framework 4.5
+				var result = await TaskEx.Run( () => {
                     ps0.Start();
                     ps0.WaitForExit();
                     return ps0;
