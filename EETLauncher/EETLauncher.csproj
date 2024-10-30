@@ -48,6 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\EETLauncher-Icon.ico</ApplicationIcon>
@@ -63,6 +64,13 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <WeaverConfiguration>
+      <Weavers>
+        <Costura />
+      </Weavers>
+    </WeaverConfiguration>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EETLauncherMain.cs">
@@ -145,10 +153,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody">
-      <Version>4.1.0</Version>
+      <Version>6.0.0-beta0000</Version>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Fody">
-      <Version>6.1.1</Version>
+      <Version>6.8.2</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
