@@ -15,7 +15,6 @@
 
 - **c#**  
 - **Windows Forms**  
-- **SAPIEN PowerShell Studio**  
 
 ## SAPIEN Notes
 
